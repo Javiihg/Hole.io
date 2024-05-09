@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityCenter: {x: 0, y: 0, z: 0}
-  widthBuildings: 10
-  heightBuildings: 10
+  widthBuildings: 20
+  heightBuildings: 20
   spaceBetweenElements: 2
   buildingPrefabs:
   - {fileID: 8394945023026303218, guid: 8142a266b9ae12247af408dbc2c0e81f, type: 3}
@@ -165,8 +165,13 @@ MonoBehaviour:
   - {fileID: 3493936700310946647, guid: fb26f094afd291043ae281253362e02d, type: 3}
   - {fileID: 942395706879418587, guid: cca880d96d5675b4c83fda0081f69e2f, type: 3}
   - {fileID: 5959416277719594369, guid: 3d57df18555f5d846ad9f359c52f7179, type: 3}
-  roadPrefab: {fileID: 0}
-  stuffPrefabs: []
+  roadPrefab: {fileID: 121652296399206100, guid: 779362e4c6b0dfe4a872e8c3a184928b,
+    type: 3}
+  stuffPrefabs:
+  - {fileID: 3885429096496066238, guid: d6a34ef6f6e84ad47999423142a17da2, type: 3}
+  - {fileID: 8493423270026877552, guid: 6f025dd1bc91b2541845cf319678bc04, type: 3}
+  - {fileID: 6067695894672560065, guid: f384217d7c3ee1948950409fcd965920, type: 3}
+  - {fileID: 599235688522042499, guid: 6a8fe2de1dbbd0548b037d9b6be4dfeb, type: 3}
   possibilityNotBuilding: 0.4
 --- !u!4 &114836633
 Transform:
@@ -269,13 +274,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 2.5925045, y: 13.4562845, z: 0.997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 1977285438}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,7 +567,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: efec5eabdbd70a140a851850934c45c7, type: 2}
+  - {fileID: 2100000, guid: 6f907e73e4c973c4a9ad7a089b0b3e03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -621,7 +626,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.0001, z: 0.8}
+  m_LocalScale: {x: 0.8, y: 0.01, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1977285438}
@@ -667,7 +672,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6f907e73e4c973c4a9ad7a089b0b3e03, type: 2}
+  - {fileID: 2100000, guid: efec5eabdbd70a140a851850934c45c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -706,6 +711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1977285438}
+  - component: {fileID: 1977285439}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -728,13 +734,26 @@ Transform:
   m_Children:
   - {fileID: 1173844926}
   - {fileID: 1776336424}
+  - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1977285439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977285437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14bbdc47f44b658419071c2754573494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1977285438}
