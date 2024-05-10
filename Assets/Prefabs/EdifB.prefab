@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7198040760286691352}
+  - component: {fileID: -3608441207658964529}
   m_Layer: 0
   m_Name: EdifB
   m_TagString: Untagged
@@ -33,6 +34,27 @@ Transform:
   - {fileID: 8842247154408739217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-3608441207658964529
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210908998714964814}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.6144931, y: 1, z: 2.008459}
+  m_Center: {x: 0.054912448, y: 0, z: -0.013122737}
 --- !u!1001 &7262666477223892641
 PrefabInstance:
   m_ObjectHideFlags: 0

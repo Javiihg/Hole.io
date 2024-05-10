@@ -24,11 +24,11 @@ public class CityBuilder : MonoBehaviour
 
         for (int x = 0; x < widthBuildings; x++)
         {
-            if (x % 2 == 0)
+            if (x % 2 == 0) //verifica si x es par
             {
-                for (int y = 0; y < heightBuildings; y++)
+                for (int y = 0; y < heightBuildings; y++) //bucle for en z
                 {
-                    if (Random.value > possibilityNotBuilding)
+                    if (Random.value > possibilityNotBuilding) //compara y añade un edificio
                     {
                         GameObject prefab = buildingPrefabs[Random.Range(0, buildingPrefabs.Length)];
                         Instantiate(prefab, position, Quaternion.identity);
@@ -38,10 +38,10 @@ public class CityBuilder : MonoBehaviour
                         GameObject stuffPrefab = stuffPrefabs[Random.Range(0, stuffPrefabs.Length)];
                         Instantiate(stuffPrefab, position, Quaternion.identity);
                     }
-                    position.z += spaceBetweenElements;
+                    position.z += spaceBetweenElements; //la posicionen z se incrementa para colocar el siguiente objeto
                 }
             }
-            else
+            else //si es impar se ejecuta "else", generando una carretera
             {
                 for (int y = 0; y < heightBuildings; y++)
                 {

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7196318447339733798}
+  - component: {fileID: -3339901506954988911}
   m_Layer: 0
   m_Name: EdifC
   m_TagString: Untagged
@@ -33,6 +34,27 @@ Transform:
   - {fileID: 7275138082378696841}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-3339901506954988911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74770807365007002}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.121945, y: 1, z: 2.0454798}
+  m_Center: {x: 0.0064918995, y: 0, z: 0.00929302}
 --- !u!1001 &5927471132403715154
 PrefabInstance:
   m_ObjectHideFlags: 0
