@@ -20,9 +20,28 @@ public class Movement : MonoBehaviour
 
     void MovePlayer()
     {
+        Vector3 inputPosition = Vector3.zero;
+
         if (Input.GetMouseButton(0))
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            inputPosition = Input.mousePosition;
+            MoveToPosition(inputPosition);
+        }
+
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
+            {
+                inputPosition = touch.position;
+                MoveToPosition(inputPosition);
+            }
+        }
+    }
+
+    void MoveToPosition(Vector3 screenPosition)
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 Vector3 targetPosition = hit.point;
@@ -41,6 +60,5 @@ public class Movement : MonoBehaviour
 
                 transform.position = newPosition;
             }
-        }
     }
 }
