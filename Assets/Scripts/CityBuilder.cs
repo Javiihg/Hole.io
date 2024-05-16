@@ -5,52 +5,81 @@ using UnityEngine;
 public class CityBuilder : MonoBehaviour
 {
     public Vector3 cityCenter;
-    public int widthBuildings = 10;
-    public int heightBuildings = 10;
+    public int widthBuildings = 20;
+    public int heightBuildings = 20;
     public float spaceBetweenElements = 2.0f;
     public GameObject[] buildingPrefabs;
     public GameObject roadPrefab;
     public GameObject[] stuffPrefabs;
     public float possibilityNotBuilding = 0.4f;
+    public GameObject player;
 
     void Start()
     {
         GenerateCity();
+        PlacePlayer();
     }
 
     void GenerateCity()
-    {
-        Vector3 position = cityCenter;
+{
+    // Calcular el punto de inicio basado en el centro de la ciudad
+    Vector3 startPosition = new Vector3(
+        cityCenter.x - (widthBuildings * spaceBetweenElements) / 2 + spaceBetweenElements / 2,
+        cityCenter.y,
+        cityCenter.z - (heightBuildings * spaceBetweenElements) / 2 + spaceBetweenElements / 2
+    );
 
-        for (int x = 0; x < widthBuildings; x++)
+    Vector3 position = startPosition;
+
+    for (int x = 0; x < widthBuildings; x++)
+    {
+        for (int y = 0; y < heightBuildings; y++)
         {
-            if (x % 2 == 0) //verifica si x es par
+            GameObject toInstantiate;
+            if (x % 2 == 0) // Si x es par, decide si colocar un edificio o stuff
             {
-                for (int y = 0; y < heightBuildings; y++) //bucle for en z
+                if (Random.value > possibilityNotBuilding && buildingPrefabs.Length > 0)
                 {
-                    if (Random.value > possibilityNotBuilding) //compara y añade un edificio
-                    {
-                        GameObject prefab = buildingPrefabs[Random.Range(0, buildingPrefabs.Length)];
-                        Instantiate(prefab, position, Quaternion.identity);
-                    }
-                    else if (stuffPrefabs.Length > 0)
-                    {
-                        GameObject stuffPrefab = stuffPrefabs[Random.Range(0, stuffPrefabs.Length)];
-                        Instantiate(stuffPrefab, position, Quaternion.identity);
-                    }
-                    position.z += spaceBetweenElements; //la posicionen z se incrementa para colocar el siguiente objeto
+                    toInstantiate = buildingPrefabs[Random.Range(0, buildingPrefabs.Length)];
+                }
+                else if (stuffPrefabs.Length > 0)
+                {
+                    toInstantiate = stuffPrefabs[Random.Range(0, stuffPrefabs.Length)];
+                }
+                else
+                {
+                    continue;
                 }
             }
-            else //si es impar se ejecuta "else", generando una carretera
+            else // Si x es impar, colocar una carretera
             {
-                for (int y = 0; y < heightBuildings; y++)
-                {
-                    Instantiate(roadPrefab, position, Quaternion.identity);
-                    position.z += spaceBetweenElements;
-                }
+                toInstantiate = roadPrefab;
             }
-            position.z = cityCenter.z;
-            position.x += spaceBetweenElements;
+
+            Instantiate(toInstantiate, position, Quaternion.identity);
+            position.z += spaceBetweenElements;
         }
+        position.z = startPosition.z; // Resetear z a la posición de inicio de la fila
+        position.x += spaceBetweenElements;
     }
+}
+
+    void PlacePlayer()
+{
+    if (player != null)
+    {
+        // Calcular la posición de la esquina inferior izquierda
+        // Nota: Asumimos que cityCenter está realmente en el centro del mapa generado.
+        Vector3 playerStartPosition = new Vector3(
+            cityCenter.x - (widthBuildings * spaceBetweenElements) / 2,
+            player.transform.position.y, // Mantén la altura original del jugador
+            cityCenter.z - (heightBuildings * spaceBetweenElements) / 2
+        );
+        player.transform.position = playerStartPosition;
+    }
+    else
+    {
+        Debug.LogError("Player object is not assigned in the inspector!");
+    }
+}
 }
