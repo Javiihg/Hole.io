@@ -13,11 +13,13 @@ public class CityBuilder : MonoBehaviour
     public GameObject[] stuffPrefabs;
     public float possibilityNotBuilding = 0.4f;
     public GameObject player;
+    public GameObject[] enemyPrefabs;
 
     void Start()
     {
         GenerateCity();
         PlacePlayer();
+        PlaceEnemies();
     }
 
     void GenerateCity()
@@ -68,18 +70,40 @@ public class CityBuilder : MonoBehaviour
 {
     if (player != null)
     {
-        // Calcular la posición de la esquina inferior izquierda
-        // Nota: Asumimos que cityCenter está realmente en el centro del mapa generado.
+        // Calcular la posición de la esquina inferior izquierda y restar un pequeño desplazamiento hacia la izquierda
+        float offsetToLeft = 1.0f;
+        float offsetToDown = 1.0f; // Desplazamiento a la izquierda, ajustable según sea necesario
         Vector3 playerStartPosition = new Vector3(
-            cityCenter.x - (widthBuildings * spaceBetweenElements) / 2,
+            cityCenter.x + (widthBuildings * spaceBetweenElements) / 2 - offsetToLeft, // Resta el offset aquí
             player.transform.position.y, // Mantén la altura original del jugador
-            cityCenter.z - (heightBuildings * spaceBetweenElements) / 2
+            cityCenter.z + (heightBuildings * spaceBetweenElements) / 2 - offsetToDown
         );
         player.transform.position = playerStartPosition;
     }
     else
     {
         Debug.LogError("Player object is not assigned in the inspector!");
+    }
+}
+
+void PlaceEnemies()
+{
+    if (enemyPrefabs.Length < 3)
+    {
+        Debug.LogError("Not enough enemy prefabs assigned!");
+        return;
+    }
+
+    // Calcula posiciones para los tres enemigos
+    Vector3[] enemyPositions = new Vector3[3];
+    enemyPositions[0] = new Vector3(cityCenter.x - (widthBuildings * spaceBetweenElements) / 2.85f, cityCenter.y = 0.1f, cityCenter.z - (heightBuildings * spaceBetweenElements) / 2.5f); // Esquina inferior izquierda
+    enemyPositions[1] = new Vector3(cityCenter.x + (widthBuildings * spaceBetweenElements) / 2.22f, cityCenter.y = 0.1f, cityCenter.z - (heightBuildings * spaceBetweenElements) / 2.5f); // Esquina superior derecha
+    enemyPositions[2] = new Vector3(cityCenter.x - (widthBuildings * spaceBetweenElements) / 2.85f, cityCenter.y = 0.1f, cityCenter.z + (heightBuildings * spaceBetweenElements) / 2.5f); // Esquina superior izquierda
+
+    // Instancia cada enemigo en su posición designada
+    for (int i = 0; i < enemyPositions.Length; i++)
+    {
+        Instantiate(enemyPrefabs[i], enemyPositions[i], Quaternion.identity);
     }
 }
 }
