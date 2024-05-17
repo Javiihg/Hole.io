@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 324850237387310778}
   - component: {fileID: 2589372998422476665}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EdifH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,6 +118,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: base
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: de5d11618e30a2840855483151f3566d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -200,6 +205,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 973337248309051562}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b19e8e227f5e9d4e9975826d0080d3c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 681364891519639601}
   m_SourcePrefab: {fileID: 100100000, guid: 3b19e8e227f5e9d4e9975826d0080d3c, type: 3}
 --- !u!1 &2513325513264098082 stripped
 GameObject:
@@ -228,6 +237,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.020067396, y: 0.0129999975, z: 0.02950069}
   m_Center: {x: 0, y: 0, z: 0.015749648}
+--- !u!114 &681364891519639601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2513325513264098082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fda349a6f2fa7f4aa7abda18283f031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absorptionTime: 2
+  points: 256
 --- !u!4 &3002476604702601624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3b19e8e227f5e9d4e9975826d0080d3c,

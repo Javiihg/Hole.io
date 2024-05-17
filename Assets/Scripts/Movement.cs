@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     public float moveSpeed = 2f;
     public float maxDistanceSpeed = 0.1f; // Máxima distancia que el jugador puede moverse por frame
     private Camera mainCamera;
+    public LayerMask groundLayer;
 
     void Start()
     {
@@ -38,7 +39,7 @@ public class Movement : MonoBehaviour
     void MoveToPosition(Vector3 screenPosition)
     {
         Ray ray = mainCamera.ScreenPointToRay(screenPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
         {
             Vector3 targetPosition = hit.point;
             targetPosition.y = transform.position.y;  

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8972981653425002186}
   - component: {fileID: 5094489221522297053}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Stuff4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,6 +116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: road_straight_crossing
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 19a9bda6eae45eb4e9ff7b895d396b90,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
