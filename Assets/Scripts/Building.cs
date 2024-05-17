@@ -12,6 +12,8 @@ public class Building : MonoBehaviour
     private float currentAbsorption = 0f;  // Tiempo que ha estado siendo absorbido
     private LTDescr absorptionTween;       // Referencia a la animación de LeanTween
 
+    private Vector3 originalScale; // To store the original scale of the building
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -19,6 +21,8 @@ public class Building : MonoBehaviour
         {
             Debug.LogError("GameManager not found in the scene.");
         }
+
+        originalScale = transform.localScale; // Store the original scale at the start
     }
 
     void Update()
@@ -35,15 +39,18 @@ public class Building : MonoBehaviour
 
     void Absorb()
     {
-        if (gameManager != null)
+        if (isBeingAbsorbed) // Only absorb if it's still being absorbed
         {
-            gameManager.AddPoints(points);
+            if (gameManager != null)
+            {
+                gameManager.AddPoints(points);
+            }
+            else
+            {
+                Debug.LogError("GameManager is null.");
+            }
+            Destroy(gameObject);
         }
-        else
-        {
-            Debug.LogError("GameManager is null.");
-        }
-        Destroy(gameObject);
     }
 
     public void StartAbsorption()
@@ -51,6 +58,7 @@ public class Building : MonoBehaviour
         if (!isBeingAbsorbed)
         {
             isBeingAbsorbed = true;
+            currentAbsorption = 0f; // Ensure absorption starts from zero
             absorptionTween = LeanTween.scale(gameObject, Vector3.zero, absorptionTime).setOnComplete(Absorb);
         }
     }
@@ -60,8 +68,12 @@ public class Building : MonoBehaviour
         if (isBeingAbsorbed)
         {
             isBeingAbsorbed = false;
-            LeanTween.cancel(absorptionTween.uniqueId);
-            transform.localScale = Vector3.one;  // Reset to original scale or any desired scale
+            currentAbsorption = 0f; // Reset the absorption progress
+            if (absorptionTween != null) // Check if there is an active tween
+            {
+                LeanTween.cancel(absorptionTween.uniqueId);
+            }
+            transform.localScale = originalScale;  // Reset to original scale
         }
     }
 }

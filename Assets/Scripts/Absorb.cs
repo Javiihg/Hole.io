@@ -7,6 +7,7 @@ public class Absorb : MonoBehaviour
     public float sizeThreshold = 1.0f;
     public float proximityThreshold = 1.5f;
     private Collider playerCollider;
+    private LTDescr absorptionTween; 
 
     private void Start()
     {
