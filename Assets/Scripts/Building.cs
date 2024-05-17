@@ -51,6 +51,7 @@ public class Building : MonoBehaviour
                 Debug.LogError("GameManager is null.");
             }
             Destroy(gameObject);
+            isBeingAbsorbed = false;
         }
     }
 

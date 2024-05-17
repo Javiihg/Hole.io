@@ -57,9 +57,14 @@ public class Absorb : MonoBehaviour
     }
 
     private void AbsorbObject(GameObject target)
-    {
-        Destroy(target);
-    }
+{
+    if (target == null) return;
+
+    float scaleDownTime = 1.0f;
+    LeanTween.scale(target, Vector3.zero, scaleDownTime).setOnComplete(() => {
+        if (target != null) Destroy(target);
+    });
+}
 
     private void HandleAbsorption(Collider other, bool start)  
     {
