@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   absorptionTime: 1.61
   points: 400
+  cost: 400
 --- !u!1001 &8813803099916413487
 PrefabInstance:
   m_ObjectHideFlags: 0

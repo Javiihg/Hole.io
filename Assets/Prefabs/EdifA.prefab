@@ -293,4 +293,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   absorptionTime: 0.5
-  points: 125
+  points: 200
+  cost: 0

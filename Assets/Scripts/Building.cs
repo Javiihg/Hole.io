@@ -6,6 +6,7 @@ public class Building : MonoBehaviour
 {
     public float absorptionTime = 1.0f;  // Tiempo necesario para absorber completamente
     public int points = 250;             // Puntos otorgados al ser absorbido
+    public int cost = 100;
     private GameManager gameManager;
 
     private bool isBeingAbsorbed = false;  // Indica si el edificio está siendo absorbido
@@ -39,7 +40,7 @@ public class Building : MonoBehaviour
 
     void Absorb()
     {
-        if (isBeingAbsorbed) // Only absorb if it's still being absorbed
+        if (isBeingAbsorbed) 
         {
             if (gameManager != null)
             {
@@ -55,10 +56,10 @@ public class Building : MonoBehaviour
 
     public void StartAbsorption()
     {
-        if (!isBeingAbsorbed)
+        if (!isBeingAbsorbed && gameManager.score >= cost)
         {
             isBeingAbsorbed = true;
-            currentAbsorption = 0f; // Ensure absorption starts from zero
+            currentAbsorption = 0f; 
             absorptionTween = LeanTween.scale(gameObject, Vector3.zero, absorptionTime).setOnComplete(Absorb);
         }
     }
@@ -68,12 +69,12 @@ public class Building : MonoBehaviour
         if (isBeingAbsorbed)
         {
             isBeingAbsorbed = false;
-            currentAbsorption = 0f; // Reset the absorption progress
-            if (absorptionTween != null) // Check if there is an active tween
+            currentAbsorption = 0f; 
+            if (absorptionTween != null) 
             {
                 LeanTween.cancel(absorptionTween.uniqueId);
             }
-            transform.localScale = originalScale;  // Reset to original scale
+            transform.localScale = originalScale;  
         }
     }
 }

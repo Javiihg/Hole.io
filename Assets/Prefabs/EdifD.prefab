@@ -250,7 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   absorptionTime: 1.51
-  points: 247
+  points: 300
+  cost: 300
 --- !u!4 &8755229839724561655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ffba0c0c00aad764c94a26c36e7915bd,

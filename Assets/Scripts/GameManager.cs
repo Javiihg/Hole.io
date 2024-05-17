@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public void AddPoints(int pointsToAdd)
     {
         score += pointsToAdd;
+        Debug.Log("Total Points: " + score);
         UpdatePlayerSize();
     }
 
