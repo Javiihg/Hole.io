@@ -16,7 +16,7 @@ public class Absorb : MonoBehaviour
 
         if (!playerCollider)
         {
-            Debug.LogError("No Collider attached to the player!");
+            Debug.LogError("No Collider!");
         }
 
         if (!rb)

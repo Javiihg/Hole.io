@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9169589511074974145}
   - component: {fileID: 5487705089422310671}
+  - component: {fileID: 3265104008201578380}
   m_Layer: 0
   m_Name: Enemigo2 2
   m_TagString: Untagged
@@ -55,6 +56,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3265104008201578380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577641970722332182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d467ac2fa56ead34bafd15f6d39e8dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  namnamMultiplier: 2
 --- !u!1 &3852115247057084995
 GameObject:
   m_ObjectHideFlags: 0
