@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class Absorb : MonoBehaviour
 {
-    public float sizeThreshold = 1.0f;
+     public float sizeThreshold = 1.0f;
     public float proximityThreshold = 1.5f;
     private Collider playerCollider;
     private Rigidbody rb;
 
     private void Start()
+{
+    playerCollider = GetComponent<Collider>();
+    rb = GetComponent<Rigidbody>();
+
+    if (playerCollider == null)
     {
-        playerCollider = GetComponent<Collider>();
-        rb = GetComponent<Rigidbody>();
-
-        if (!playerCollider)
-        {
-            Debug.LogError("No Collider!");
-        }
-
-        if (!rb)
-        {
-            rb = gameObject.AddComponent<Rigidbody>();
-            rb.isKinematic = true; 
-        }
+        playerCollider = gameObject.AddComponent<BoxCollider>();  // Añade un BoxCollider si no se encuentra ninguno
     }
+
+    if (rb == null)
+    {
+        rb = gameObject.AddComponent<Rigidbody>();
+        rb.isKinematic = true; 
+    }
+}
 
     private void OnTriggerEnter(Collider other)  
     {
@@ -42,20 +42,31 @@ public class Absorb : MonoBehaviour
     }
 
     private bool ShouldAbsorb(Collider other)  
+{
+    if (playerCollider == null) playerCollider = GetComponent<Collider>();  // Intentar obtener el Collider nuevamente
+    if (other == null || playerCollider == null)
     {
-        bool isSmaller = other.bounds.size.magnitude < playerCollider.bounds.size.magnitude * sizeThreshold;
-        bool isCloseEnough = IsCloseEnoughToCenter(other.transform);
-        return isSmaller && isCloseEnough;
+        return false;
     }
+
+    bool isSmaller = other.bounds.size.magnitude < playerCollider.bounds.size.magnitude * sizeThreshold;
+    bool isCloseEnough = IsCloseEnoughToCenter(other.transform);
+    return isSmaller && isCloseEnough;
+}
 
     private bool IsCloseEnoughToCenter(Transform otherTransform)
+{
+    if (playerCollider == null || otherTransform == null || otherTransform.GetComponent<Collider>() == null)
     {
-        Vector3 closestPoint = playerCollider.ClosestPoint(otherTransform.position);
-        float distance = Vector3.Distance(closestPoint, otherTransform.position);
-        float invasionThreshold = otherTransform.GetComponent<Collider>().bounds.extents.magnitude * 0.5f;
-        return distance < invasionThreshold;
+
+        return false;
     }
 
+    Vector3 closestPoint = playerCollider.ClosestPoint(otherTransform.position);
+    float distance = Vector3.Distance(closestPoint, otherTransform.position);
+    float invasionThreshold = otherTransform.GetComponent<Collider>().bounds.extents.magnitude * 0.5f;
+    return distance < invasionThreshold;
+}
     private void AbsorbObject(GameObject target)
 {
     if (target == null) return;
