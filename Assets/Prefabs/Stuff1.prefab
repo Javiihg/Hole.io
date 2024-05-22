@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fda349a6f2fa7f4aa7abda18283f031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  absorptionTime: 0.5
+  absorptionTime: 0.75
   points: 50
   cost: 0
 --- !u!65 &6824233419671283778
