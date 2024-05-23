@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5633674208519851356}
   m_Layer: 0
   m_Name: Enemigo2 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,8 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d467ac2fa56ead34bafd15f6d39e8dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  namnamMultiplier: 2
+  speed: 0.6
+  mapWidth: 20
+  mapHeight: 20
+  closeEnoughDistance: 0.5
 --- !u!114 &-7542005071172151077
 MonoBehaviour:
   m_ObjectHideFlags: 0

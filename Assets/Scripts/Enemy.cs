@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 2f;
-    public float namnamMultiplier = 2f;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float mapWidth = 20f;
+    [SerializeField] private float mapHeight = 20f;
+    [SerializeField] private float closeEnoughDistance = 0.5f; // Distance to consider as having reached the target
+
     private Vector3 targetPosition;
 
     void Start()
@@ -20,21 +23,19 @@ public class Enemy : MonoBehaviour
         CheckIfReachedTarget();
     }
 
-    void SetRandomTargetPosition()
+    private void SetRandomTargetPosition()
     {
-        float mapWidth = 20f;
-        float mapHeigh = 20f;
-        targetPosition = new Vector3(Random.Range(-mapWidth / 2, mapWidth / 2), 0.1f, Random.Range(-mapHeigh / 2, mapHeigh / 2));
+        targetPosition = new Vector3(Random.Range(-mapWidth / 2, mapWidth / 2), 0.1f, Random.Range(-mapHeight / 2, mapHeight / 2));
     }
 
-    void MoveTowardsTarget()
+    private void MoveTowardsTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
 
-    void CheckIfReachedTarget()
+    private void CheckIfReachedTarget()
     {
-        if (Vector3.Distance(transform.position, targetPosition) < 0.5f)
+        if (Vector3.Distance(transform.position, targetPosition) < closeEnoughDistance)
         {
             SetRandomTargetPosition();
         }

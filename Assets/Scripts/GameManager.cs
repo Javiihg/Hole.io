@@ -4,11 +4,26 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int score;
-    public Transform playerTransform;  // Referencia al Transform del jugador
-    public float growthFactor = 0.1f;  // Factor de crecimiento del jugador
+    public static GameManager Instance { get; private set; } // Singleton instance
 
-    private int lastScoreUpdate = 0;   // Puntuación al último cambio de tamaño
+    public int score;
+    public Transform playerTransform;  // Reference to the Player's Transform
+    public float growthFactor = 0.1f;  // Growth factor for the player
+
+    private int lastScoreUpdate = 0;   // Score at the last size change
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject); // Ensure that there's only one GameManager instance
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Optionally keep this object across scenes
+        }
+    }
 
     void Start()
     {
@@ -25,15 +40,11 @@ public class GameManager : MonoBehaviour
         UpdatePlayerSize();
     }
 
-    void UpdatePlayerSize()
+    private void UpdatePlayerSize()
     {
-        // Comprobar si el puntaje ha pasado un múltiplo de 200 desde el último ajuste de tamaño
         if ((score - lastScoreUpdate) >= 200)
         {
-            // Aumentar tamaño del jugador
             playerTransform.localScale *= (1 + growthFactor);
-
-            // Actualizar lastScoreUpdate al último múltiplo de 200 alcanzado
             lastScoreUpdate += ((score - lastScoreUpdate) / 200) * 200;
         }
     }
