@@ -92,7 +92,7 @@ public class Absorb : MonoBehaviour
 
     private void HandleAbsorption(Collider other, bool start)
     {
-        // Handle buildings similar to before
+        //Mantener las ciudades absorbiendo
         Building building = other.GetComponent<Building>();
         if (building != null)
         {

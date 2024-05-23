@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdatePlayerSize()
     {
-        if ((score - lastScoreUpdate) >= 200)
+        if ((score - lastScoreUpdate) >= 400)
         {
             playerTransform.localScale *= (1 + growthFactor);
             lastScoreUpdate += ((score - lastScoreUpdate) / 200) * 200;
