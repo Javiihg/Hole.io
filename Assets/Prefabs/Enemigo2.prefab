@@ -87,7 +87,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeThreshold: 1
-  proximityThreshold: 1.5
 --- !u!54 &-7619473148988743059
 Rigidbody:
   m_ObjectHideFlags: 0

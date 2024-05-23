@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed = 2f;
     [SerializeField] private float mapWidth = 20f;
     [SerializeField] private float mapHeight = 20f;
-    [SerializeField] private float closeEnoughDistance = 0.5f; // Distance to consider as having reached the target
+    [SerializeField] private float closeEnoughDistance = 0.5f; //Distancia rescpecto al target
 
     private Vector3 targetPosition;
 

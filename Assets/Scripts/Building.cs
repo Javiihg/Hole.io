@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    private GameObject absorber; // Agrega esta variable
+    private GameObject absorber; 
     public float absorptionTime = 1.0f;
     public int points = 250;
     public int cost = 100;

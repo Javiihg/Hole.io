@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour
     void MoveToPosition(Vector3 screenPosition)
     {
         Ray ray = mainCamera.ScreenPointToRay(screenPosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer)) //uso de groundLayer para que solo se mueva en tierra
         {
             Vector3 targetPosition = hit.point;
             targetPosition.y = transform.position.y;  

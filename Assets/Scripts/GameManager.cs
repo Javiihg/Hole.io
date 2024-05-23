@@ -4,34 +4,34 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; } // Singleton instance
+    public static GameManager Instance { get; private set; } 
 
     public int score;
-    public Transform playerTransform;  // Reference to the Player's Transform
-    public float growthFactor = 0.1f;  // Growth factor for the player
+    public Transform playerTransform;  
+    public float growthFactor = 0.1f;  
 
-    private int lastScoreUpdate = 0;   // Score at the last size change
+    private int lastScoreUpdate = 0;   
 
     void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); // Ensure that there's only one GameManager instance
+            Destroy(gameObject); 
         }
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Optionally keep this object across scenes
+            DontDestroyOnLoad(gameObject); 
         }
     }
 
-    void Start()
+    /*void Start()
     {
         if (playerTransform == null)
         {
             Debug.LogError("Player Transform is not assigned!");
         }
-    }
+    }*/
 
     public void AddPoints(int pointsToAdd)
     {
