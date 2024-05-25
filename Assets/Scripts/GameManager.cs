@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; } 
+
+    public TextMeshProUGUI timerText;
+    public float timeRemaining = 120;
+    private bool timerRunning = false;
 
     public int score;
     public Transform playerTransform;  
@@ -22,6 +27,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); 
+            StartTimer();
         }
     }
 
@@ -32,6 +38,43 @@ public class GameManager : MonoBehaviour
             Debug.LogError("Player Transform is not assigned!");
         }
     }*/
+
+    void Update()
+    {
+        if (timerRunning)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+                UpdateTimerDisplay(timeRemaining);
+            }
+            else
+            {
+                TimerEnded();
+                timeRemaining = 0;
+                timerRunning = false;
+            }
+        }
+    }
+    
+    public void StartTimer()
+    {
+        timerRunning = true;
+        timeRemaining = 120;
+    }
+
+    void UpdateTimerDisplay (float timeToDisplay)
+    {
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    private void TimerEnded()
+    {
+        timerText.text = "00:00";
+        Debug.Log("Se acabó!!");
+    }
 
     public void AddPoints(int pointsToAdd)
     {

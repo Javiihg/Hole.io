@@ -822,6 +822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95562bf8f909c754ea42e737c29bd253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerText: {fileID: 805683468}
+  timeRemaining: 120
   score: 0
   playerTransform: {fileID: 1977285438}
   growthFactor: 0.1

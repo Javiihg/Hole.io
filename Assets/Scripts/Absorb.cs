@@ -7,7 +7,7 @@ public class Absorb : MonoBehaviour
     public float sizeThreshold = 1.0f;  // Determinar si puede ser absorbido
     private Collider playerCollider;
     private Rigidbody rb;
-    private Dictionary<GameObject, Vector3> originalSizes = new Dictionary<GameObject, Vector3>();  // Almacenar las escalas originales
+    private Dictionary<GameObject, Vector3> originalSizes = new Dictionary<GameObject, Vector3>();  //Almacenar las escalas originales
 
     private void Start()
     {
@@ -24,7 +24,6 @@ public class Absorb : MonoBehaviour
         }
         HandleAbsorption(other, true);
     }
-
     private void OnTriggerStay(Collider other)
     {
         if (other != null && ShouldAbsorb(other))
@@ -49,6 +48,7 @@ public class Absorb : MonoBehaviour
             return false;
         }
 
+        //Compara tamaño de ambos jugadores para poder absorber
         bool isSmaller = other.bounds.size.magnitude < playerCollider.bounds.size.magnitude * sizeThreshold;
         Vector3 closestPoint = playerCollider.ClosestPoint(other.transform.position);
         float distanceToCenter = Vector3.Distance(closestPoint, other.transform.position);
@@ -92,7 +92,7 @@ public class Absorb : MonoBehaviour
 
     private void HandleAbsorption(Collider other, bool start)
     {
-        //Mantener las ciudades absorbiendo
+        //Mantener las ciudades mientras se absorben
         Building building = other.GetComponent<Building>();
         if (building != null)
         {
