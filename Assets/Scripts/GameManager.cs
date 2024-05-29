@@ -11,11 +11,14 @@ public class GameManager : MonoBehaviour
     public float timeRemaining = 120;
     private bool timerRunning = false;
 
+    public TextMeshProUGUI scoreText;
     public int score;
     public Transform playerTransform;  
     public float growthFactor = 0.1f;  
 
     private int lastScoreUpdate = 0;   
+
+    public GameObject defeatScreen;
 
     void Awake()
     {
@@ -31,13 +34,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    /*void Start()
+    void Start()
     {
-        if (playerTransform == null)
-        {
-            Debug.LogError("Player Transform is not assigned!");
-        }
-    }*/
+        scoreText.text = "Score: " + score;
+        defeatScreen.SetActive(false);
+    }
 
     void Update()
     {
@@ -50,9 +51,9 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                TimerEnded();
                 timeRemaining = 0;
                 timerRunning = false;
+                EndGame();
             }
         }
     }
@@ -70,15 +71,10 @@ public class GameManager : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    private void TimerEnded()
-    {
-        timerText.text = "00:00";
-        Debug.Log("Se acabó!!");
-    }
-
     public void AddPoints(int pointsToAdd)
     {
         score += pointsToAdd;
+        scoreText.text = "Score: " + score;
         Debug.Log("Total Points: " + score);
         UpdatePlayerSize();
     }
@@ -91,4 +87,13 @@ public class GameManager : MonoBehaviour
             lastScoreUpdate += ((score - lastScoreUpdate) / 200) * 200;
         }
     }
+
+    public void EndGame()
+{
+    timerRunning = false;
+    defeatScreen.SetActive(true);
+    timerText.text = "00:00";
+    Debug.Log("Game Over!");
+}
+    
 }

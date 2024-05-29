@@ -58,22 +58,26 @@ public class Absorb : MonoBehaviour
     }
     
     private void StartAbsorption(GameObject target)
+{
+    if (target == null) return;
+
+    if (!originalSizes.ContainsKey(target))
     {
-        if (target == null) return;
-
-        if (!originalSizes.ContainsKey(target))
-        {
-            originalSizes[target] = target.transform.localScale;
-        }
-
-        if ((gameObject.tag == "Player" && target.tag == "Enemy") || (gameObject.tag == "Enemy" && target.tag == "Player"))
-        {
-            LeanTween.scale(target, Vector3.zero, 0.5f).setOnComplete(() => {
-                Destroy(target);
-                originalSizes.Remove(target);
-            });
-        }
+        originalSizes[target] = target.transform.localScale;
     }
+
+    if ((gameObject.tag == "Player" && target.tag == "Enemy") || (gameObject.tag == "Enemy" && target.tag == "Player"))
+    {
+        LeanTween.scale(target, Vector3.zero, 0.5f).setOnComplete(() => {
+            Destroy(target);
+            originalSizes.Remove(target);
+            if (target.tag == "Player") // Asegúrate de que el tag está correctamente escrito
+            {
+                GameManager.Instance.EndGame();
+            }
+        });
+    }
+}
 
     private void ContinueAbsorption(GameObject target)
     {

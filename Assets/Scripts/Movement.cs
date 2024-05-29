@@ -54,4 +54,10 @@ public class Movement : MonoBehaviour
             transform.position = newPosition;
         }
     }
+
+    public void DestroyPlayer()
+{
+    GameManager.Instance.EndGame(); // Llama a EndGame antes de destruir el objeto
+    Destroy(gameObject); // Destruye el objeto del jugador
+}
 }
