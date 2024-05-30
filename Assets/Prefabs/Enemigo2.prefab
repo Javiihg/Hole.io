@@ -70,10 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d467ac2fa56ead34bafd15f6d39e8dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  growthFactor: 0.05
-  scoreText: {fileID: 0}
-  speed: 0.6
+  speed: 0.3
   mapWidth: 20
   mapHeight: 20
   closeEnoughDistance: 0.5

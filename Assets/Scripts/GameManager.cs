@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     public float timeRemaining = 120;
     private bool timerRunning = false;
 
+    public bool gameHasEnded = false;
+
+    public TextMeshProUGUI finalScoreText;
+
     public TextMeshProUGUI scoreText;
     public int score;
     public Transform playerTransform;  
@@ -88,10 +92,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void RewardEnemies(int points)
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy enemy in enemies)
+        {
+            enemy.AddPoints(points);
+        }
+    }
+
     public void EndGame()
 {
     timerRunning = false;
+    gameHasEnded = true;
     defeatScreen.SetActive(true);
+    finalScoreText.text = "Final Score: " + score;
     timerText.text = "00:00";
     Debug.Log("Game Over!");
 }

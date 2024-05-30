@@ -16,7 +16,10 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
+        if (!GameManager.Instance.gameHasEnded)
+        {
+            HandleInput();
+        }
     }
 
     void HandleInput()
