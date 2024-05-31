@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     void Grow()
     {
         // Incrementa la escala cada vez que se agregan puntos
-        float growthFactor = 0.05f; // Define cuánto crece
+        float growthFactor = 0.05f; 
         transform.localScale += new Vector3(growthFactor, growthFactor, growthFactor);
     }
 }

@@ -9,6 +9,9 @@ public class Absorb : MonoBehaviour
     private Rigidbody rb;
     private Dictionary<GameObject, Vector3> originalSizes = new Dictionary<GameObject, Vector3>();  //Almacenar las escalas originales
 
+    public float growthFactor = 0.1f;
+    public Transform playerTransform;
+
     private void Start()
     {
         playerCollider = GetComponent<Collider>() ?? gameObject.AddComponent<BoxCollider>();
@@ -72,10 +75,27 @@ public class Absorb : MonoBehaviour
             Destroy(target);
             originalSizes.Remove(target);
             GameManager.Instance.AddPoints(200);
-            if (target.tag == "Player") // Asegúrate de que el tag está correctamente escrito
+            if (target.tag == "Player") 
             {
                 GameManager.Instance.EndGame();
             }
+        });
+    }
+
+    if ((gameObject.tag == "Player" && target.tag == "PowerUp"))
+    {
+        LeanTween.scale(target, Vector3.zero, 0.5f).setOnComplete(() => {
+            Destroy(target);
+            GameManager.Instance.AddTime(20);
+        });
+    }
+
+    if ((gameObject.tag == "Player" && target.tag == "PowerLess"))
+    {
+        LeanTween.scale(target, Vector3.zero, 0.5f).setOnComplete(() => {
+            Destroy(target);
+            GameManager.Instance.AddPoints(-50);
+            playerTransform.localScale *= (1 - growthFactor);
         });
     }
 }

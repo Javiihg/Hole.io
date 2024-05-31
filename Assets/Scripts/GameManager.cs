@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI scoreText;
     public int score;
+
+    public int time;
     public Transform playerTransform;
     public float growthFactor = 0.1f;
 
@@ -81,6 +83,11 @@ public class GameManager : MonoBehaviour
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+    public void AddTime(int timeToAdd)
+    {
+        timeRemaining += timeToAdd;
+    }
+
     public void AddPoints(int pointsToAdd)
     {
         score += pointsToAdd;
@@ -96,6 +103,7 @@ public class GameManager : MonoBehaviour
             playerTransform.localScale *= (1 + growthFactor);
             lastScoreUpdate = score;
         }
+
     }
 
     public void RewardEnemies(int points)
@@ -133,19 +141,19 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         score = 0;
-    timeRemaining = 120;
-    timerRunning = true;
-    gameHasEnded = false;
-    scoreText.text = "Score: " + score;
-    maxScoreText.text = "Max Score: " + PlayerPrefs.GetInt("MaxScore", 0);
-    defeatScreen.SetActive(false);
+        timeRemaining = 120;
+        timerRunning = true;
+        gameHasEnded = false;
+        scoreText.text = "Score: " + score;
+        maxScoreText.text = "Max Score: " + PlayerPrefs.GetInt("MaxScore", 0);
+        defeatScreen.SetActive(false);
 
 
     // Reinicia la visibilidad y estado de todos los botones necesarios.
-    restartButton.SetActive(true);
-    exitButton.SetActive(true);
+        restartButton.SetActive(true);
+        exitButton.SetActive(true);
 
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ExitGame()

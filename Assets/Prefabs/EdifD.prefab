@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   absorptionTime: 0.75
   points: 50
-  cost: 0
+  cost: -1000
 --- !u!65 &975908004784077960
 BoxCollider:
   m_ObjectHideFlags: 0

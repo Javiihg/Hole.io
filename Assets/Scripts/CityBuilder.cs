@@ -44,14 +44,12 @@ public class CityBuilder : MonoBehaviour
                 {
                     toInstantiate = buildingPrefabs[Random.Range(0, buildingPrefabs.Length)];
                 }
-                else if (stuffPrefabs.Length > 0)
+                else
                 {
                     toInstantiate = stuffPrefabs[Random.Range(0, stuffPrefabs.Length)];
                 }
-                else
-                {
-                    continue;
-                }
+                
+                
             }
             else // Si x es impar, colocar una carretera
             {

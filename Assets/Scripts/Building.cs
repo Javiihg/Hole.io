@@ -23,7 +23,7 @@ public class Building : MonoBehaviour
             Debug.LogError("GameManager not found in the scene.");
             return;
         }
-
+        
         originalScale = transform.localScale;
     }
 
@@ -63,7 +63,7 @@ private void Absorb()
 {
     if (isBeingAbsorbed)
     {
-        if (GameManager.Instance != null && absorber.tag == "Player") // Corrige esta línea para verificar el objeto que absorbe
+        if (GameManager.Instance != null && absorber.tag == "Player") 
         {
             GameManager.Instance.AddPoints(points);
         }
