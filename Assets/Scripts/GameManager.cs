@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement; // Properly placed using directive
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; } 
+    public static GameManager Instance { get; private set; }
 
     public TextMeshProUGUI timerText;
     public float timeRemaining = 120;
@@ -13,36 +14,41 @@ public class GameManager : MonoBehaviour
 
     public bool gameHasEnded = false;
 
-    public TextMeshProUGUI finalScoreText;
+    public GameObject exitButton;
 
+    public TextMeshProUGUI maxScoreText;
+
+    public TextMeshProUGUI finalScoreText;
     public TextMeshProUGUI scoreText;
     public int score;
-    public Transform playerTransform;  
-    public float growthFactor = 0.1f;  
+    public Transform playerTransform;
+    public float growthFactor = 0.1f;
 
-    private int lastScoreUpdate = 0;   
-
+    private int lastScoreUpdate = 0;
     public GameObject defeatScreen;
 
     void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); 
+            DontDestroyOnLoad(gameObject);
             StartTimer();
         }
     }
 
     void Start()
-    {
-        scoreText.text = "Score: " + score;
-        defeatScreen.SetActive(false);
-    }
+{
+    scoreText.text = "Score: " + score;
+    defeatScreen.SetActive(false);
+
+    int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
+    maxScoreText.text = "Max Score: " + maxScore;
+}
 
     void Update()
     {
@@ -55,8 +61,6 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                timeRemaining = 0;
-                timerRunning = false;
                 EndGame();
             }
         }
@@ -68,7 +72,7 @@ public class GameManager : MonoBehaviour
         timeRemaining = 120;
     }
 
-    void UpdateTimerDisplay (float timeToDisplay)
+    void UpdateTimerDisplay(float timeToDisplay)
     {
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
@@ -88,7 +92,7 @@ public class GameManager : MonoBehaviour
         if ((score - lastScoreUpdate) >= 400)
         {
             playerTransform.localScale *= (1 + growthFactor);
-            lastScoreUpdate += ((score - lastScoreUpdate) / 200) * 200;
+            lastScoreUpdate = score;  // Ensure this update does not exceed your scoring logic
         }
     }
 
@@ -109,6 +113,25 @@ public class GameManager : MonoBehaviour
     finalScoreText.text = "Final Score: " + score;
     timerText.text = "00:00";
     Debug.Log("Game Over!");
+
+    int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
+    if (score > maxScore)
+    {
+        PlayerPrefs.SetInt("MaxScore", score);
+        PlayerPrefs.Save();
+        maxScoreText.text = "Max Score: " + score;
+    }
+    exitButton.SetActive(true);
 }
-    
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ExitGame()
+{
+    Debug.Log("Exiting game.");
+    Application.Quit();
+}
 }
