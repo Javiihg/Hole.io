@@ -9,8 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float mapHeight = 20f;
     [SerializeField] private float closeEnoughDistance = 0.5f; //Distancia rescpecto al target
 
-    private int score = 0;
-    private float growthFactor = 0.5f;
+    public int points;
 
     private Vector3 targetPosition;
     private Transform enemyTransform;
@@ -47,17 +46,14 @@ public class Enemy : MonoBehaviour
 
     public void AddPoints(int pointsToAdd)
     {
-        score += pointsToAdd;
-        UpdateSize();
+        points += pointsToAdd;
+        Grow();
     }
 
-    private void UpdateSize()
-{
-    while (score >= 100) // Utiliza un bucle para manejar múltiples incrementos si es necesario
+    void Grow()
     {
-        float increment = growthFactor; // Incremento fijo por cada 100 puntos
-        enemyTransform.localScale += new Vector3(increment, increment, increment);
-        score -= 100; // Reduce la puntuación en 100 por cada incremento
+        // Incrementa la escala cada vez que se agregan puntos
+        float growthFactor = 0.05f; // Define cuánto crece
+        transform.localScale += new Vector3(growthFactor, growthFactor, growthFactor);
     }
-}
 }

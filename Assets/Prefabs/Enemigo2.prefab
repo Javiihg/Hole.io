@@ -74,6 +74,7 @@ MonoBehaviour:
   mapWidth: 20
   mapHeight: 20
   closeEnoughDistance: 0.5
+  points: 0
 --- !u!114 &2178510330907896443
 MonoBehaviour:
   m_ObjectHideFlags: 0

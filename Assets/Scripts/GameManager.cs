@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement; // Properly placed using directive
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public bool gameHasEnded = false;
 
     public GameObject exitButton;
+
+    public GameObject restartButton;
 
     public TextMeshProUGUI maxScoreText;
 
@@ -42,13 +44,13 @@ public class GameManager : MonoBehaviour
     }
 
     void Start()
-{
-    scoreText.text = "Score: " + score;
-    defeatScreen.SetActive(false);
+    {
+        scoreText.text = "Score: " + score;
+        defeatScreen.SetActive(false);
 
-    int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
-    maxScoreText.text = "Max Score: " + maxScore;
-}
+        int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
+        maxScoreText.text = "Max Score: " + maxScore;
+    }
 
     void Update()
     {
@@ -92,46 +94,63 @@ public class GameManager : MonoBehaviour
         if ((score - lastScoreUpdate) >= 400)
         {
             playerTransform.localScale *= (1 + growthFactor);
-            lastScoreUpdate = score;  // Ensure this update does not exceed your scoring logic
+            lastScoreUpdate = score;
         }
     }
 
     public void RewardEnemies(int points)
+{
+    Enemy[] enemies = FindObjectsOfType<Enemy>();
+    foreach (Enemy enemy in enemies)
     {
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-        foreach (Enemy enemy in enemies)
+        if (enemy.gameObject.tag == "Enemy")
         {
+            Debug.Log("Rewarding enemy: " + enemy.name);
             enemy.AddPoints(points);
         }
     }
+}
 
     public void EndGame()
-{
-    timerRunning = false;
-    gameHasEnded = true;
-    defeatScreen.SetActive(true);
-    finalScoreText.text = "Final Score: " + score;
-    timerText.text = "00:00";
-    Debug.Log("Game Over!");
-
-    int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
-    if (score > maxScore)
     {
-        PlayerPrefs.SetInt("MaxScore", score);
-        PlayerPrefs.Save();
-        maxScoreText.text = "Max Score: " + score;
+        timerRunning = false;
+        gameHasEnded = true;
+        defeatScreen.SetActive(true);
+        finalScoreText.text = "Final Score: " + score;
+        timerText.text = "00:00";
+        Debug.Log("Game Over!");
+
+        int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
+        if (score > maxScore)
+        {
+            PlayerPrefs.SetInt("MaxScore", score);
+            PlayerPrefs.Save();
+            maxScoreText.text = "Max Score: " + score;
+        }
+        exitButton.SetActive(true);
     }
-    exitButton.SetActive(true);
-}
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        score = 0;
+    timeRemaining = 120;
+    timerRunning = true;
+    gameHasEnded = false;
+    scoreText.text = "Score: " + score;
+    maxScoreText.text = "Max Score: " + PlayerPrefs.GetInt("MaxScore", 0);
+    defeatScreen.SetActive(false);
+
+
+    // Reinicia la visibilidad y estado de todos los botones necesarios.
+    restartButton.SetActive(true);
+    exitButton.SetActive(true);
+
+    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ExitGame()
-{
-    Debug.Log("Exiting game.");
-    Application.Quit();
-}
+    {
+        Debug.Log("Exiting game.");
+        Application.Quit();
+    }
 }
