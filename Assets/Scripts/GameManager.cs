@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        scoreText.text = "Score: " + score;
+        scoreText.text = "" + score;
         defeatScreen.SetActive(false);
 
         int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
